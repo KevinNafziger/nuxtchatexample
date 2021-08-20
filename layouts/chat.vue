@@ -45,7 +45,7 @@
       >
       <br><br>
         Welcome to <i>Feed Automator</i>, the  enterprise SaaS tool that keeps you plugged-in.<br>
-        Click the button below of the feed you wish to retrieve. 
+        Click a button below to retrieve a feed. 
         <nuxt />
       </v-container>
     </v-content>
