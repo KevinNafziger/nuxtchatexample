@@ -11,21 +11,12 @@
         :owner="message.id === user.id"
       />
     </div>
-    <div
-      v-if="typingUsers.length"
-      class="chat__typing"
-    >
-      <p
-        v-for="(typingUser, index) in typingUsers"
-        :key="`typingUser-${index}`"
-        class="chat__typing-user"
-      >
-        {{ typingUser.name }} is typing...
-      </p>
+  
+    <div class="chat__form">  
+        <FacebookBtn />
+        <TwitterBtn />  
     </div>
-    <div class="chat__form">
-      <ChatForm />
-    </div>
+  
   </div>
 </template>
 
@@ -33,6 +24,8 @@
 import { mapState, mapGetters } from "vuex";
 import Message from "@/components/Message";
 import ChatForm from "@/components/ChatForm";
+import FacebookBtn from "@/components/FacebookBtn";
+import TwitterBtn from "@/components/TwitterBtn";
 
 export default {
   name: "Chat",
@@ -40,6 +33,8 @@ export default {
   components: {
     Message,
     ChatForm,
+    FacebookBtn,
+    TwitterBtn,
   },
   computed: {
     ...mapState(["user", "messages", "users"]),
@@ -56,7 +51,7 @@ export default {
   },
   head() {
     return {
-      title: `Fintech Feed`,
+      title: `Feed Automator`,
     };
   },
 };

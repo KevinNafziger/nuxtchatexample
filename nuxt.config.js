@@ -41,7 +41,12 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/pwa',
+    '@nuxtjs/axios',
   ],
+axios: {
+    baseURL: 'https://takehome.io',
+    },
+
 
   pwa: {
     manifest: {

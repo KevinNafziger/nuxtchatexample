@@ -2,6 +2,8 @@ export const state = () => ({
   user: {},
   messages: [],
   users: [],
+  facebookData: [],
+  twitterData: [],
 });
 
 export const getters = {
@@ -19,6 +21,12 @@ export const mutations = {
   SOCKET_updateUsers(state, users) {
     state.users = users;
   },
+  clearFB(state) {
+    state.facebookData=[];
+  },
+  clearTwt(state) {
+    state.twitterData=[];
+  },
   clearData(state) {
     state.user = {};
     state.messages = [];
@@ -27,6 +35,13 @@ export const mutations = {
   setTypingStatus(state, status) {
     state.user.typingStatus = status;
   },
+  setFacebook (state, info) {
+    state.facebookData = info;
+  },
+  setTwitter (state, info) {
+    state.twitterData = info;
+  }
+
 };
 
 export const actions = {
@@ -69,6 +84,64 @@ export const actions = {
       payload: user,
     });
   },
+  async getFacebookData({dispatch, commit, state}) {
+          const { user } = state;
+          await this.$axios.get('/facebook')
+              .then( res => {
+          commit("setFacebook", res.data)    
+          }); 
+
+          var payload = {
+          msg: "Automator is fetching the Facebook feed.....",
+          id: user.id,
+          };    
+          dispatch("socketEmit", {
+          action: "createMessage",
+          payload: payload,    
+         });        
+
+
+          payload = {
+          msg: "The feed:  " + JSON.stringify(state.facebookData).replace(/\"/g, " ").replace(/[{]/g,"  " ).replace(/[\[\]']+/g,'').replace(/}/g, "   "),
+          id: user.id,
+          };   
+          setTimeout(function(){ 
+          dispatch("socketEmit", {
+          action: "createMessage",
+          payload: payload,
+    }); }, 10000) 
+        commit("clearFB");  
+  },
+
+  async getTwitterData({dispatch, commit, state}) {
+          const { user } = state;
+          await this.$axios.get('/twitter')
+              .then( res => {
+          commit("setTwitter", res.data)    
+          }); 
+
+          var payload = {
+          msg: "Automator is fetching the Twitter feed...",
+          id: user.id,
+          };    
+          dispatch("socketEmit", {
+          action: "createMessage",
+          payload: payload,    
+         }); 
+
+          payload = {
+          msg: "The feed: " + JSON.stringify(state.twitterData).replace(/\"/g, " ").replace(/[{]/g,"  " ).replace(/[\[\]']+/g,'').replace(/}/g, "   "),
+          id: user.id,
+          };    
+
+          setTimeout(function(){
+          dispatch("socketEmit", {
+          action: "createMessage",
+          payload: payload,
+       }); }, 10000)  
+        commit("clearTwt");  
+  },
+
   async createUser({ commit, dispatch }, user) {
     const { id } = await dispatch("socketEmit", {
       action: "createUser",

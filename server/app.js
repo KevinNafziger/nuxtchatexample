@@ -32,7 +32,13 @@ io.on("connection", (socket) => {
     if (user) {
       io.to(user.room).emit("newMessage", new Message(user.name, msg, id));
     }
+
   });
+
+  socket.on("createSocialMessage", ({ msg }) => {
+      io.to("Feed").emit("newMessage", new Message("Social Coordinator", msg, 1));
+  });
+
 
   socket.on("setTypingStatus", ({ room, typingStatus, id }) => {
     usersDB.setTypingStatus(id, typingStatus);

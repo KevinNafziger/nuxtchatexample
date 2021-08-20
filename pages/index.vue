@@ -15,7 +15,7 @@
         />
 
         <v-card-title>
-          <h2>Fintech Horizons</h2>
+          <h2>Feed Automator</h2>
         </v-card-title>
         <v-card-text>
           <v-form
@@ -24,13 +24,8 @@
             lazy-validation
             @submit.prevent="submit"
           >
-            <v-text-field
-              v-model="user.name"
-              :counter="16"
-              :rules="nameRules"
-              label="Display Name"
-              required
-            />
+          <input type="hidden" v-model="user.name" value="Data Helper" required>
+            
             <v-btn
               :disabled="!isValid"
               color="primary"
@@ -91,7 +86,7 @@ export default {
   },
 
   head: {
-    title: "Fintech Horizons",
+    title: "Feed Automator",
   },
 };
 </script>

@@ -18,7 +18,6 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-
 export default {
   data: () => ({
     text: "",
@@ -33,7 +32,6 @@ export default {
       if (this.$refs.form.validate()) {
         this.createMessage(this.text);
         this.text = "";
-
         this.setTypingStatus(false);
         this.resetValidation();
       }

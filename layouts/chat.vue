@@ -7,27 +7,12 @@
       color="$accent"
     >
       <br><br>
-      <h3>Fintech Horizons</h3><br><br>
-      <v-list subheader>
-        <v-subheader>Users
-        </v-subheader>
+      <h3>Feed Automator: </h3><br>
 
-        <v-list-item
-          v-for="({ name, id }, index) in users"
-          :key="`user-${index}`"
-          @click.prevent
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="name" />
-          </v-list-item-content>
-
-          <v-list-item-icon>
-            <v-icon :color="id === user.id ? 'primary' : 'grey'">
-              mdi-account-circle-outline
-            </v-icon>
-          </v-list-item-icon>
-        </v-list-item>
-      </v-list>
+      <p>Get instant updates from the top social media sites. </p>
+     
+        
+        
     </v-navigation-drawer>
 
     <v-app-bar
@@ -36,9 +21,9 @@
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title>
-        Fintech
+        Feed
         <v-chip color="grey">
-          Feed
+          Automator
         </v-chip>
       </v-toolbar-title>
         
@@ -56,8 +41,11 @@
     <v-content>
       <v-container
         fluid
-        style="height: 100%;"
+        style="height: 70%;"
       >
+      <br><br>
+        Welcome to <i>Feed Automator</i>, the  enterprise SaaS tool that keeps you plugged-in.<br>
+        Click the button below of the feed you wish to retrieve. 
         <nuxt />
       </v-container>
     </v-content>
